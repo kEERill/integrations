@@ -1,0 +1,39 @@
+{
+    "name": "keerill/integrations",
+    "description": "Adds a system of integrations with other services for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kEERilll",
+            "email": "kirill.popkov.work@gmail.com"
+        }
+    ],
+
+    "require": {
+        "php": ">=7.1.3",
+        "illuminate/support": "^7.0 || ^8.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+
+    "minimum-stability": "dev",
+
+    "autoload": {
+        "psr-4": {
+            "Keerill\\Integrations\\": "src/"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Keerill\\Integrations\\IntegrationsServiceProvider"
+            ],
+            "aliases": {
+                "Debugbar": "Keerill\\Integrations\\Integrations"
+            }
+        }
+    },
+
+    "prefer-stable": true
+}
