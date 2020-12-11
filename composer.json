@@ -30,7 +30,7 @@
                 "Keerill\\Integrations\\IntegrationsServiceProvider"
             ],
             "aliases": {
-                "Debugbar": "Keerill\\Integrations\\Integrations"
+                "Integrations": "Keerill\\Integrations\\Integrations"
             }
         }
     },

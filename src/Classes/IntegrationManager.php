@@ -10,23 +10,17 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 class IntegrationManager
 {
     /**
-     * @var string
-     */
-    protected $defaultDriver = null;
-
-    /**
      * @var array
      */
     protected $availableDrivers = null;
 
     /**
-     * @param string $defaultDriver
      * @param array $availableDrivers
+     * @return void
      */
-    public function __construct(string $defaultDriver, array $availableDrivers)
+    public function __construct(array $availableDrivers)
     {
         $this->availableDrivers = $availableDrivers;
-        $this->defaultDriver = $defaultDriver;
     }
 
     /**
@@ -52,19 +46,16 @@ class IntegrationManager
      *
      * @throws DriverException
      */
-    protected function getSelectedDriver(string $driver = null) : array
+    protected function getSelectedDriver(string $driver) : array
     {
-        if ($driver !== null) {
-            if (!isset($this->availableDrivers[$driver])) {
-                throw new DriverException(
-                    sprintf('Драйвер с именем %s не найден', $driver)
-                );
-            }
-
-            return $this->availableDrivers[$driver];
+        if (!isset($this->availableDrivers[$driver])) 
+        {
+            throw new DriverException(
+                "Driver with name {$driver} not found"
+            );
         }
 
-        return $this->availableDrivers[$this->defaultDriver];
+        return $this->availableDrivers[$driver];
     }
 
     /**
@@ -77,7 +68,7 @@ class IntegrationManager
      * @throws DriverException
      * @throws BindingResolutionException
      */
-    public function driver(string $driver = null, array $options = [])
+    public function driver(string $driver, array $options = [])
     {
         /**
          * Получение конфигурации для создания экземпляра драйвера
@@ -87,10 +78,7 @@ class IntegrationManager
         /**
          * Создание нового экземпляра драйвера
          */
-        return $this->createDriver(
-            $selectedDriver['class'],
-            array_merge($selectedDriver['options'], $options)
-        );
+        return $this->createDriver($selectedDriver['class'], array_merge($selectedDriver['options'] ?? [], $options));
     }
 
     /**

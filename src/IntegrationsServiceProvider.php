@@ -27,7 +27,7 @@ class IntegrationsServiceProvider extends ServiceProvider
 
         $this->app->bind('integrations', function ($app) {
             return new \Keerill\Integrations\Classes\IntegrationManager(
-                $app['config']['integrations']['default'], $app['config']['integrations']['drivers']
+                $app['config']['integrations']['drivers']
             );
         });
     }

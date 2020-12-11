@@ -23,5 +23,5 @@ abstract class AbstractOperation implements OperationInterface
      * @param mixed $response
      * @return void
      */
-    abstract public function handle($response = null): void;
+    abstract public function handle(): void;
 }

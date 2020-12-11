@@ -36,7 +36,7 @@ class HttpDriver extends AbstractDriver
     {
         $options = ['timeout' => static::Timeout];
 
-        if (isset($this->options['logs']) && $this->options['logs'])
+        if ($this->getOption('logs'))
         {
             $options['handler'] = $this->createLoggingHandlerStack([
                 '{method} {uri} HTTP/{version} {req_body}',
@@ -71,7 +71,7 @@ class HttpDriver extends AbstractDriver
     protected function createGuzzleLoggingMiddleware(string $messageFormat)
     {
         return Middleware::log(
-            Log::channel($this->options['logs']), new MessageFormatter($messageFormat)
+            Log::channel($this->getOption('logs')), new MessageFormatter($messageFormat)
         );
     }
 

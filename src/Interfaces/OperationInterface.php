@@ -11,9 +11,7 @@ interface OperationInterface
 
     /**
      * Выполнения операции
-     *
-     * @param mixed $driverResponse
      * @return void
      */
-    public function handle($driverResponse = null) : void;
+    public function handle() : void;
 }
